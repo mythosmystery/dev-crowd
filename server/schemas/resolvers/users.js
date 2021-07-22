@@ -1,4 +1,10 @@
 const { User } = require('../../models');
+const jwt = require('jsonwebtoken');
+
+const signToken = ({ _id, email, username }) => {
+   return jwt.sign({ _id, email, username }, 'Sooooooper seeeeecret', { expiresIn: '2h' });
+};
+
 module.exports = {
    Query: {
       users: async () => {
@@ -18,7 +24,10 @@ module.exports = {
       addUser: async (parent, { username, email, password }) => {
          const user = await User.create({ username, email, password });
          const token = signToken(user);
-         return { token, user };
+         return {
+            ...user._doc,
+            token,
+         };
       },
       login: async (parent, { email, password }) => {
          const user = await User.findOne({ email });
@@ -30,7 +39,10 @@ module.exports = {
             throw new AuthenticationError('Incorrect password');
          }
          const token = signToken(user);
-         return { token, user };
+         return {
+            ...user._doc,
+            token,
+         };
       },
    },
 };

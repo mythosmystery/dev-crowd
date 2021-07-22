@@ -13,4 +13,4 @@ Link to Live Application
 <https://github.com/ashak90/project-03-dev-crowd>
 
 ## Authors
-This project was created by Anthony Davis, Asha Kumar, Erica Roquemore, Hunter Barton, and Valentin Garcia
+This project was created by Anthony Davis, Asha Kumar, Erica Roquemore, Hunter Barton, and Valentin Garcia.

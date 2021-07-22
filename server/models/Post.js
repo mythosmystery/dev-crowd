@@ -1,18 +1,34 @@
-const { Schema } = require('mongoose');
+const { Schema, model } = require('mongoose');
 const commentSchema = require('./Comment');
 
-const postSchema = new Schema({
-   content: {
-      type: String,
-      required: true,
+const postSchema = new Schema(
+   {
+      content: {
+         type: String,
+         required: true,
+      },
+      date: {
+         type: Date,
+         default: Date.now,
+      },
+      likes: [{ type: Schema.ObjectId, ref: 'User' }],
+      comments: [commentSchema],
+      postedBy: {
+         type: Schema.ObjectId,
+         ref: 'User',
+      },
    },
-   date: {
-      type: Date,
-      default: Date.now,
-   },
-   likes: {
-      type: Number,
-   },
-   comments: [commentSchema],
+   {
+      toJSON: {
+         virtuals: true,
+      },
+   }
+);
+postSchema.virtual('likeCount').get(() => {
+   return this.likes.length;
 });
-module.exports = postSchema;
+postSchema.virtual('commentCount').get(() => {
+   return this.comments.length;
+});
+const Post = model('Post', postSchema);
+module.exports = Post;

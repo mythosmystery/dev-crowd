@@ -20,6 +20,7 @@ const typeDefs = gql`
       postedBy: User
       likeCount: Int
       commentCount: Int
+      username: String
    }
    type Comment {
       _id: ID

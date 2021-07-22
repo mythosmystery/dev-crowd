@@ -2,7 +2,7 @@ const { User } = require('../../models');
 const jwt = require('jsonwebtoken');
 
 const signToken = ({ _id, email, username }) => {
-   return jwt.sign({ _id, email, username }, 'Sooooooper seeeeecret', { expiresIn: '2h' });
+   return jwt.sign({ _id, email, username }, 'super secret', { expiresIn: '2h' });
 };
 
 module.exports = {

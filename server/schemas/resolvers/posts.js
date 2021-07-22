@@ -5,7 +5,7 @@ module.exports = {
          return Post.find().populate('postedBy');
       },
       post: async (parent, { postId }) => {
-         return Post.findOne({ _id: postId });
+         return Post.findOne({ _id: postId }).populate('postedBy');
       },
    },
    Mutation: {},

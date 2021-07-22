@@ -27,6 +27,9 @@ const postSchema = new Schema(
 postSchema.virtual('likeCount').get(() => {
    return this.likes.length;
 });
+postSchema.virtual('username').get(() => {
+   return this.postedBy.username;
+});
 postSchema.virtual('commentCount').get(() => {
    return this.comments.length;
 });

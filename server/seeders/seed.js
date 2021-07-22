@@ -6,10 +6,21 @@ const postSeeds = require('./postSeeds.json');
 db.once('open', async () => {
    try {
       await User.deleteMany({});
-      await User.create(userSeeds);
-      await Post.deleteMany({});
-      await Post.create(postSeeds);
+      const user = await User.create({
+         name: 'Test Testerson',
+         username: 'testttt',
+         email: 'test@test.net',
+         password: 'password123',
+      });
 
+      await Post.deleteMany({});
+      const post = await Post.create({
+         content: 'test post',
+         date: 123445567,
+         postedBy: user,
+      });
+
+      console.log(post);
       console.log('all done!');
       process.exit(0);
    } catch (err) {

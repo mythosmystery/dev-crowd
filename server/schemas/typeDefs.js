@@ -4,25 +4,34 @@ const typeDefs = gql`
    input PostInput {
       content: String!
       date: Int!
-      likes: Int
+      postedBy: User!
    }
    type User {
       _id: ID
-      username: String
-      email: String
-      bookCount: Int
-      posts: [Post]
+      username: String!
+      name: String
+      email: String!
+      password: String
+      followers: [User]
+      following: [User]
+      followerCount: Int
    }
    type Post {
+      _id: ID
       content: String!
       date: Int!
-      likes: Int
+      likes: [User]
       comments: [Comment]
+      postedBy: User
+      likeCount: Int
+      commentCount: Int
    }
    type Comment {
       content: String!
       date: Int!
-      likes: Int
+      likes: [User]
+      postedBy: User
+      likeCount: Int
    }
    type Auth {
       token: ID!
@@ -38,10 +47,10 @@ const typeDefs = gql`
 
    type Mutation {
       login(email: String!, password: String!): Auth
-      addUser(username: String!, email: String!, password: String!): Auth
-      addPost(input: PostInput): User
+      addUser(username: String!, name: String!, email: String!, password: String!): Auth
+      addPost(input: PostInput): Post
       addComment(input: PostInput): Post
-      removePost(postId: ID!): User
+      removePost(postId: ID!)
       removeComment(commentId: ID!): Post
       likePost(postId: ID!): Post
       likeComment(commentId: ID!): Comment

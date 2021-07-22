@@ -1,7 +1,14 @@
 [
     {
-        "username": "Test Testerson",
+        "name": "Test Testerson",
+        "username": "testttt",
         "email": "test@test.net",
         "password": "password123"        
+    },
+    {
+        "name": "Jim Testman",
+        "username": "jttestman",
+        "email": "jim@test.net",
+        "password": "password"
     }
 ]

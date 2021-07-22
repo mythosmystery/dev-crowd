@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
-const postSchema = require('./Post');
 
 const userSchema = new Schema(
    {
@@ -8,6 +7,10 @@ const userSchema = new Schema(
          type: String,
          required: true,
          unique: true,
+      },
+      name: {
+         type: String,
+         required: true,
       },
       email: {
          type: String,
@@ -19,7 +22,8 @@ const userSchema = new Schema(
          type: String,
          required: true,
       },
-      posts: [postSchema],
+      followers: [{ type: Schema.ObjectId, ref: 'User' }],
+      following: [{ type: Schema.ObjectId, ref: 'User' }],
    },
    // set this to use virtual below
    {
@@ -44,9 +48,8 @@ userSchema.methods.isCorrectPassword = async function (password) {
    return bcrypt.compare(password, this.password);
 };
 
-// when we query a user, we'll also get another field called `bookCount` with the number of saved books we have
-userSchema.virtual('postCount').get(function () {
-   return this.posts.length;
+userSchema.virtual('followerCount').get(() => {
+   return this.followers.length;
 });
 
 const User = model('User', userSchema);

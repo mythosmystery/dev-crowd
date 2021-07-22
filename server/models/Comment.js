@@ -7,8 +7,9 @@ const commentSchema = new Schema({
       type: Date,
       default: Date.now,
    },
-   likes: {
-      type: Number,
+   postedBy: {
+      type: Schema.ObjectId,
+      ref: 'User',
    },
 });
 module.exports = commentSchema;

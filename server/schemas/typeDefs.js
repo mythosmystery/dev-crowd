@@ -6,7 +6,7 @@ const typeDefs = gql`
       username: String!
       name: String
       email: String!
-      token: Strign!
+      token: String!
       followers: [User]
       following: [User]
       followerCount: Int
@@ -38,13 +38,13 @@ const typeDefs = gql`
    }
 
    type Query {
-      getUsers: [User]!
-      getUser(userId: ID!): User
+      users: [User]!
+      user(userId: ID!): User
       me: User!
-      getPosts: [Post]!
-      getPost(postId: ID!): Post
-      getComments(postId: ID!): [Comment]
-      getComment(postId: ID!, commentId: ID!): Comment
+      posts: [Post]!
+      post(postId: ID!): Post
+      comments(postId: ID!): [Comment]
+      comment(postId: ID!, commentId: ID!): Comment
    }
 
    type Mutation {

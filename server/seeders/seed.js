@@ -16,8 +16,17 @@ db.once('open', async () => {
       await Post.deleteMany({});
       const post = await Post.create({
          content: 'test post',
-         date: 123445567,
          postedBy: user,
+         comments: [
+            {
+               content: 'test comment',
+               postedBy: user,
+            },
+            {
+               content: 'test comment2',
+               postedBy: user,
+            },
+         ],
       });
 
       console.log(post);

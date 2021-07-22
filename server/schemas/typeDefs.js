@@ -1,17 +1,12 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
-   input PostInput {
-      content: String!
-      date: Int!
-      postedBy: User!
-   }
    type User {
       _id: ID
       username: String!
       name: String
       email: String!
-      password: String
+      token: Strign!
       followers: [User]
       following: [User]
       followerCount: Int
@@ -27,33 +22,44 @@ const typeDefs = gql`
       commentCount: Int
    }
    type Comment {
+      _id: ID
       content: String!
       date: Int!
       likes: [User]
       postedBy: User
       likeCount: Int
    }
-   type Auth {
-      token: ID!
-      user: User
+
+   input UserInput {
+      username: String!
+      name: String!
+      email: String!
+      password: String!
    }
 
    type Query {
-      users: [User]!
-      user(userId: ID!): User
+      getUsers: [User]!
+      getUser(userId: ID!): User
       me: User!
-      post(postId: ID!): Post
+      getPosts: [Post]!
+      getPost(postId: ID!): Post
+      getComments(postId: ID!): [Comment]
+      getComment(postId: ID!, commentId: ID!): Comment
    }
 
    type Mutation {
-      login(email: String!, password: String!): Auth
-      addUser(username: String!, name: String!, email: String!, password: String!): Auth
-      addPost(input: PostInput): Post
-      addComment(input: PostInput): Post
-      removePost(postId: ID!)
+      login(email: String!, password: String!): User
+      addUser(userInput: UserInput): User
+      addPost(content: String!): Post
+      addComment(content: String!, postId: ID!): Post
+
+      removePost(postId: ID!): String
       removeComment(commentId: ID!): Post
+
       likePost(postId: ID!): Post
-      likeComment(commentId: ID!): Comment
+      likeComment(commentId: ID!): Post
+      unlikePost(postId: ID!): Post
+      unlikeComment(commentId: ID!): Post
    }
 `;
 

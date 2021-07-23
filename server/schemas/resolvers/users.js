@@ -1,4 +1,5 @@
 const { User } = require('../../models');
+const { AuthenticationError } = require('apollo-server-express');
 const jwt = require('jsonwebtoken');
 
 const signToken = ({ _id, email, username }) => {
@@ -14,8 +15,9 @@ module.exports = {
          return User.findOne({ _id: userId });
       },
       me: async (parent, args, context) => {
-         if (context.user) {
-            return User.findOne({ _id: context.user._id });
+         console.log(context.body);
+         if (user) {
+            return User.findOne({ _id: user._id });
          }
          throw new AuthenticationError('You need to be logged in');
       },
@@ -25,7 +27,7 @@ module.exports = {
          const user = await User.create({ username, email, password });
          const token = signToken(user);
          return {
-            ...user._doc,
+            user,
             token,
          };
       },
@@ -40,7 +42,7 @@ module.exports = {
          }
          const token = signToken(user);
          return {
-            ...user._doc,
+            user,
             token,
          };
       },

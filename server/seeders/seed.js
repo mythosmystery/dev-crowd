@@ -17,6 +17,7 @@ db.once('open', async () => {
       const post = await Post.create({
          content: 'test post',
          postedBy: user,
+         username: user.username,
          comments: [
             {
                content: 'test comment',

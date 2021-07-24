@@ -1,17 +1,53 @@
 import React from 'react';
-import { Button } from 'semantic-ui-react'
 import logo1 from '../Assets/images/logo1.png';
+import developer_hands from '../Assets/images/developer_hands.jpeg';
+import social_media from '../Assets/images/social_media.jpeg';
+import Container from 'react-bootstrap/Container';
+import Carousel from 'react-bootstrap/Carousel';
 
 function Home() {
     return (
-        <div>
-            <img src={logo1} alt="devcrowd"/>
-            <h1>Welcome to DevCrowd!</h1>
-            <h3>The only social media app for Developers.</h3><br></br>
-            <Button primary>Login</Button>
-            <Button positive>Register</Button>
-        </div>
-    );
+        <Container fluid="md">
+            {/* <Row classname="justify-content-md-center">
+                <h1>Welcome to DevCrowd!</h1>
+                <img src={logo1} alt="devcrowd" />
+            </Row> */}
+            <Carousel>
+                <Carousel.Item>
+                    <img
+                        className="d-block w-100"
+                        src={logo1} alt="devcrowd"
+                        alt="First slide"
+                    />
+                    <Carousel.Caption>
+                        <h3>Welcome to DevCrowd!</h3>
+                    </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <img
+                        className="d-block w-100"
+                        src={developer_hands} alt="devs"
+                        alt="Second slide"
+                    />
+
+                    <Carousel.Caption>
+                        <h3>Make life long friends!</h3>
+                    </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <img
+                        className="d-block w-100"
+                        src={social_media} alt="social"
+                        alt="Third slide"
+                    />
+
+                    <Carousel.Caption>
+                        <h3>Stay connected with you dev friends!</h3>
+                    </Carousel.Caption>
+                </Carousel.Item>
+            </Carousel>
+        </Container >
+    )
 }
 
 export default Home;

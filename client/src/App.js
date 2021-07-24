@@ -9,16 +9,18 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
     <Router>
       <Container>
-      <Navbar/>
-      <Route exact path= '/' component={Home}/>
-      <Route exact path = '/login' component = {Login}/>
-      <Route exact path = '/register' component = {Register}/>
+        <Navbar />
+        <Route exact path='/' component={Home} />
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/register' component={Register} />
       </Container>
+      <Footer />
     </Router>
   );
 }

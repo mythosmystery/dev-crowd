@@ -4,7 +4,7 @@ import {Button, Form} from 'react-bootstrap';
 function Register() {
     return (
         <div>
-            <h1>Register Page</h1>
+            <h1>Create Account</h1>
             <p>Please enter your information to create an account.</p>
             {/* create User, fname, lname  */}
             <Form>
@@ -36,6 +36,10 @@ function Register() {
                     <Form.Control required type="password" placeholder="Password" />
                 </Form.Group>
                 
+                <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                    <Form.Check required type="checkbox" label="I agree to terms & service" />
+                </Form.Group>
+
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>

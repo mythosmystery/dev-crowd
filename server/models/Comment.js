@@ -1,17 +1,26 @@
-const { Schema } = require('mongoose');
+const { Schema, model } = require('mongoose');
 const commentSchema = new Schema(
    {
       content: {
          type: String,
+         required: true,
       },
       date: {
          type: Date,
          default: Date.now,
       },
-      likes: [{ type: Schema.ObjectId, ref: 'User' }],
+      likes: [{ type: Schema.Types.ObjectId, ref: 'User' }],
       postedBy: {
-         type: Schema.ObjectId,
+         type: Schema.Types.ObjectId,
          ref: 'User',
+      },
+      postedOn: {
+         type: Schema.Types.ObjectId,
+         ref: 'Post',
+      },
+      username: {
+         type: String,
+         required: true,
       },
    },
    {
@@ -20,7 +29,6 @@ const commentSchema = new Schema(
       },
    }
 );
-commentSchema.virtual('likeCount').get(() => {
-   return this.likes.length;
-});
-module.exports = commentSchema;
+
+const Comment = model('Comment', commentSchema);
+module.exports = Comment;

@@ -1,9 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
 import { LIKE_POST } from '../utils/mutations';
-import { Button, Icon } from 'semantic-ui-react';
+import { Button, Label } from 'semantic-ui-react';
 
 function LikePostButton({ user, post: { id, likeCount, like } }) {
 
@@ -19,4 +18,15 @@ function LikePostButton({ user, post: { id, likeCount, like } }) {
         variable: { postId: id }
     });
 
+
+    return (
+        <Button as="div" labelPosition="right" onClick={likePost}>
+            <Label pointing="left">
+                {likeCount}
+            </Label>
+        </Button>
+    );
+
 }
+
+export default LikePostButton

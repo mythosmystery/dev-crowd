@@ -4,17 +4,20 @@ module.exports = {
       posts: async () => {
          const posts = await Post.find()
             .populate('postedBy')
+            .populate('likes')
             .populate({ path: 'comments', populate: { path: 'postedBy' } });
          return posts;
       },
       post: async (parent, { postId }) => {
          return Post.findOne({ _id: postId })
             .populate('postedBy')
+            .populate('likes')
             .populate({ path: 'comments', populate: { path: 'postedBy' } });
       },
       postsByUser: async (parent, { username }) => {
          return Post.find({ username })
             .populate('postedBy')
+            .populate('likes')
             .populate({ path: 'comments', populate: { path: 'postedBy' } });
       },
    },
@@ -36,6 +39,10 @@ module.exports = {
          } catch (err) {
             return err;
          }
+      },
+      likePost: async (parent, { postId }, { user }) => {
+         const post = await Post.findOneAndUpdate({ _id: postId }, { $addToSet: { likes: user._id } }, { new: true }).populate('likes');
+         return post;
       },
    },
 };

@@ -18,6 +18,7 @@ const postSchema = new Schema(
       },
       username: {
          type: String,
+         required: true,
       },
    },
    {

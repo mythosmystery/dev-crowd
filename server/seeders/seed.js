@@ -21,12 +21,14 @@ db.once('open', async () => {
          content: 'test comment',
          postedBy: user._id,
          postedOn: postId,
+         username: user.username,
       });
       const comment2 = await Comment.create({
          _id: '60fd0f753d62ff405f783011',
          content: 'test comment2',
          postedBy: user._id,
          postedOn: postId,
+         username: user.username,
       });
 
       await Post.deleteMany({});

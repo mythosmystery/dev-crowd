@@ -1,4 +1,4 @@
-const { User } = require('../../models');
+const { User, Post, Comment } = require('../../models');
 const { AuthenticationError } = require('apollo-server-express');
 const jwt = require('jsonwebtoken');
 const { signToken } = require('../../utils/auth');
@@ -41,6 +41,14 @@ module.exports = {
             user,
             token,
          };
+      },
+      removeUser: async (parent, args, { user }) => {
+         if (user) {
+            await User.deleteOne({ _id: user._id });
+            await Post.deleteMany({ postedBy: user._id });
+            await Comment.deleteMany({ postedBy: user._id });
+         }
+         throw new AuthenticationError('must be logged in');
       },
    },
 };

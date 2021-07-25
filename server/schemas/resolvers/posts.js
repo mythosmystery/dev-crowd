@@ -1,4 +1,4 @@
-const { Post } = require('../../models');
+const { Post, Comment } = require('../../models');
 module.exports = {
    Query: {
       posts: async () => {
@@ -27,6 +27,15 @@ module.exports = {
             username: user.username,
          });
          return post;
+      },
+      removePost: async (parent, { postId }, { user }) => {
+         try {
+            await Post.deleteOne({ _id: postId, username: user.username });
+            await Comment.deleteMany({ postedOn: postId });
+            return 'removed ok';
+         } catch (err) {
+            return err;
+         }
       },
    },
 };

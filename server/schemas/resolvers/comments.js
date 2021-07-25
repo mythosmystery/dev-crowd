@@ -14,8 +14,13 @@ module.exports = {
             content: content,
             postedBy: user._id,
             postedOn: postId,
+            username: user.username,
          });
          return await Post.findOneAndUpdate({ _id: postId }, { $addToSet: { comments: comment } }, { new: true });
+      },
+      removeComment: async (parent, { commentId }, { user }) => {
+         await Comment.deleteOne({ _id: commentId, username: user.username });
+         return 'deleted ok';
       },
    },
 };

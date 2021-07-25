@@ -25,6 +25,7 @@ const typeDefs = gql`
       likes: [User]
       postedBy: User
       postedOn: Post
+      username: String
    }
    type Auth {
       token: ID!
@@ -54,6 +55,7 @@ const typeDefs = gql`
    type Mutation {
       login(email: String!, password: String!): Auth
       addUser(userInput: UserInput): Auth
+      removeUser(userId: ID): String
       followUser(userId: ID!): User
 
       addPost(content: String!): Post
@@ -61,7 +63,7 @@ const typeDefs = gql`
       likePost(postId: ID!): Post
 
       addComment(content: String!, postId: ID!): Post
-      removeComment(commentId: ID!): Post
+      removeComment(commentId: ID!): String
       likeComment(commentId: ID!): Post
    }
 `;

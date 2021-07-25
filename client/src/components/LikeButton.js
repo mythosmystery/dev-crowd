@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { LIKE_POST } from '../utils/mutations';
 import { Button, Label } from 'semantic-ui-react';
 
-function LikePostButton({ user, post: { id, likeCount, like } }) {
+function LikePostButton({ user, post: { id, likeCount, likes } }) {
 
     const [liked, setLiked] = useState(false);
 

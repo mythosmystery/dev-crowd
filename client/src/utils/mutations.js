@@ -27,7 +27,7 @@ mutation login($username:String!, $password:String!){
 
 `;
 
-export const ADD_POST_MUTATION = gql`
+export const ADD_POST = gql`
 mutation createPost($content:String!){
     createPost(content:$content){
         id
@@ -51,7 +51,7 @@ mutation createPost($content:String!){
 
 `;
 
-export const ADD_COMMENT_MUTATION = gql`
+export const ADD_COMMENT = gql`
 mutation($postID:ID!, $content: String!){
     addComment(postId:$postId, conttent:$content){
         id
@@ -65,14 +65,14 @@ mutation($postID:ID!, $content: String!){
 }
 `;
 
-export const REMOVE_POST_MUTATION = gql`
+export const REMOVE_POST = gql`
 mutation removePost ($postId:ID!){
     removePost(postId:$postId)
 }
 `;
 
 
-export const REMOVE_COMMENT_MUTATION = gql`
+export const REMOVE_COMMENT = gql`
 mutation removeComment($commentId:ID!){
     removeComment(commentId:$commentId){
         id
@@ -87,7 +87,7 @@ mutation removeComment($commentId:ID!){
 
 `;
 
-export const LIKE_POST_MUTATION = gql`
+export const LIKE_POST = gql`
 mutation likePost($postId:ID!){
     likePost(postId:$postId){
         id
@@ -100,7 +100,7 @@ mutation likePost($postId:ID!){
 } 
 `;
 
-export const LIKE_COMMENT_MUTATION = gql`
+export const LIKE_COMMENT = gql`
 mutation likeCommnet($commentId:ID!){
     likeComment(commentId:$commentId){
         id

@@ -14,6 +14,10 @@ const commentSchema = new Schema(
          type: Schema.Types.ObjectId,
          ref: 'User',
       },
+      postedOn: {
+         type: Schema.Types.ObjectId,
+         ref: 'Post',
+      },
    },
    {
       toJSON: {

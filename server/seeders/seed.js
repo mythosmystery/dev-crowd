@@ -2,6 +2,7 @@ const db = require('../config/connection');
 const { User, Post, Comment } = require('../models');
 const userSeeds = require('./userSeeds.json');
 const postSeeds = require('./postSeeds.json');
+const postId = '60fd0f26b2e0bb3ffeaf7e06';
 
 db.once('open', async () => {
    try {
@@ -19,16 +20,18 @@ db.once('open', async () => {
          _id: '60fd0f753d62ff405f783010',
          content: 'test comment',
          postedBy: user._id,
+         postedOn: postId,
       });
       const comment2 = await Comment.create({
          _id: '60fd0f753d62ff405f783011',
          content: 'test comment2',
          postedBy: user._id,
+         postedOn: postId,
       });
 
       await Post.deleteMany({});
       const post = await Post.create({
-         _id: '60fd0f26b2e0bb3ffeaf7e06',
+         _id: postId,
          content: 'test post',
          postedBy: user._id,
          username: user.username,

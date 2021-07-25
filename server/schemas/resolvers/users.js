@@ -6,21 +6,21 @@ const { signToken } = require('../../utils/auth');
 module.exports = {
    Query: {
       users: async () => {
-         return User.find();
+         return User.find().populate('followers').populate('following');
       },
       user: async (parent, { userId }) => {
-         return User.findOne({ _id: userId });
+         return User.findOne({ _id: userId }).populate('followers').populate('following');
       },
       me: async (parent, args, { user }) => {
          if (user) {
-            return User.findOne({ _id: user._id });
+            return User.findOne({ _id: user._id }).populate('followers').populate('following');
          }
          throw new AuthenticationError('You need to be logged in');
       },
    },
    Mutation: {
-      addUser: async (parent, { username, email, password }) => {
-         const user = await User.create({ username, email, password });
+      addUser: async (parent, { userInput }) => {
+         const user = await User.create({ ...userInput });
          const token = signToken(user);
          return {
             user,
@@ -49,6 +49,10 @@ module.exports = {
             await Comment.deleteMany({ postedBy: user._id });
          }
          throw new AuthenticationError('must be logged in');
+      },
+      followUser: async (parent, { userId }, { user }) => {
+         const newUser = await User.findOneAndUpdate({ _id: user._id }, { $addToSet: { following: userId } }, { new: true }).populate('following');
+         return await User.findOneAndUpdate({ _id: userId }, { $addToSet: { followers: user._id } }, { new: true }).populate('followers');
       },
    },
 };

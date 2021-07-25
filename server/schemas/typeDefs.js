@@ -57,6 +57,7 @@ const typeDefs = gql`
       addUser(userInput: UserInput): Auth
       removeUser(userId: ID): String
       followUser(userId: ID!): User
+      unfollowUser(userId: ID!): User
 
       addPost(content: String!): Post
       removePost(postId: ID!): String

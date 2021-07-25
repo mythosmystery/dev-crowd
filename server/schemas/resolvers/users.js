@@ -51,8 +51,12 @@ module.exports = {
          throw new AuthenticationError('must be logged in');
       },
       followUser: async (parent, { userId }, { user }) => {
-         const newUser = await User.findOneAndUpdate({ _id: user._id }, { $addToSet: { following: userId } }, { new: true }).populate('following');
+         const newUser = await User.findOneAndUpdate({ _id: user._id }, { $addToSet: { following: userId } }, { new: true });
          return await User.findOneAndUpdate({ _id: userId }, { $addToSet: { followers: user._id } }, { new: true }).populate('followers');
+      },
+      unfollowUser: async (parent, { userId }, { user }) => {
+         const newUser = await User.findOneAndUpdate({ _id: user._id }, { $pull: { following: userId } }, { new: true });
+         return await User.findOneAndUpdate({ _id: userId }, { $pull: { followers: user._id } }, { new: true }).populate('followers');
       },
    },
 };

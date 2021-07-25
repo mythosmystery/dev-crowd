@@ -1,10 +1,7 @@
 const { User } = require('../../models');
 const { AuthenticationError } = require('apollo-server-express');
 const jwt = require('jsonwebtoken');
-
-const signToken = ({ _id, email, username }) => {
-   return jwt.sign({ _id, email, username }, 'super secret', { expiresIn: '2h' });
-};
+const { signToken } = require('../../utils/auth');
 
 module.exports = {
    Query: {
@@ -14,8 +11,7 @@ module.exports = {
       user: async (parent, { userId }) => {
          return User.findOne({ _id: userId });
       },
-      me: async (parent, args, context) => {
-         console.log(context.body);
+      me: async (parent, args, { user }) => {
          if (user) {
             return User.findOne({ _id: user._id });
          }

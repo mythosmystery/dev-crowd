@@ -50,8 +50,8 @@ const typeDefs = gql`
       post(postId: ID!): Post
       postsByUser(username: String!): [Post]
 
-      comments(postId: ID!): [Comment]
-      comment(postId: ID!, commentId: ID!): Comment
+      comments: [Comment]
+      comment(commenttId: ID!): Comment
    }
 
    type Mutation {

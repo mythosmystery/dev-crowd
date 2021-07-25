@@ -22,8 +22,8 @@ const userSchema = new Schema(
          type: String,
          required: true,
       },
-      followers: [{ type: Schema.ObjectId, ref: 'User' }],
-      following: [{ type: Schema.ObjectId, ref: 'User' }],
+      followers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+      following: [{ type: Schema.Types.ObjectId, ref: 'User' }],
    },
    // set this to use virtual below
    {
@@ -47,10 +47,6 @@ userSchema.pre('save', async function (next) {
 userSchema.methods.isCorrectPassword = async function (password) {
    return bcrypt.compare(password, this.password);
 };
-
-userSchema.virtual('followerCount').get(() => {
-   return this.followers.length;
-});
 
 const User = model('User', userSchema);
 

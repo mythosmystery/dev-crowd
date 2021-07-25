@@ -1,14 +1,11 @@
-const { Post } = require('../../models');
+const { Comment } = require('../../models');
 module.exports = {
    Query: {
-      comments: async (parent, { postId }) => {
-         const post = await Post.findOne({ _id: postId });
-         return post.comments;
+      comments: async () => {
+         return await Comment.find().populate('postedBy');
       },
-      comment: async (parent, { postId, commentId }) => {
-         const post = await Post.findOne({ _id: postId });
-         const commentIndex = post.comments.findIndex((comment) => comment.id === commentId);
-         return post.comments[commentIndex];
+      comment: async (parent, { commentId }) => {
+         return await Comment.findOne({ _id: commentId }).populate('postedBy');
       },
    },
    Mutation: {},

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Feed, Icon, Label, Image } from "semantic-ui-react";
 import { Link } from 'react-router-dom';
+import { Auth } from '../utils/auth'
 import moment from 'moment';
 import LikePostButton from './LikeButton';
 
@@ -8,7 +9,7 @@ import LikePostButton from './LikeButton';
 function FeedCard({
     post: { content, date, id, username, likes }
 }) {
-    const { user } = useContext(AuthContext);
+    const { user } = useContext(Auth);
 
     return (
         <Feed.Event>

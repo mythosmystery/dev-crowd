@@ -45,3 +45,5 @@ class AuthService {
       window.location.assign('/');
    }
 }
+
+export default AuthService

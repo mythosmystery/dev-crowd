@@ -37,17 +37,17 @@ function Register(props) {
         <div>
             <h1>Create Account</h1>
             <p>Please enter your information to create an account.</p>
-            {/* create User, fname, lname  */}
+
             <Form onSubmit={handleFormSubmit}>
                 <Form.Group className="mb-3" controlId="formFname">
-                    <Form.Label>First Name </Form.Label>
-                    <Form.Control required type="text" placeholder="Enter first name" onChange={handleChange} />
+                    <Form.Label>Full Name </Form.Label>
+                    <Form.Control required type="text" placeholder="Enter your name" />
                 </Form.Group>
-
-                <Form.Group className="mb-3" controlId="formLname">
+                
+                {/* <Form.Group className="mb-3" controlId="formLname">
                     <Form.Label>Last Name </Form.Label>
-                    <Form.Control required type="text" placeholder="Enter last name" onChange={handleChange} />
-                </Form.Group>
+                    <Form.Control required type="text" placeholder="Enter last name" />
+                </Form.Group> */}                
 
                 <Form.Group className="mb-3" controlId="formUsername">
                     <Form.Label>Username </Form.Label>

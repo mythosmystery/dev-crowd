@@ -20,6 +20,7 @@ module.exports = {
    },
    Mutation: {
       addUser: async (parent, { userInput }) => {
+         //console.log(userInput);
          const user = await User.create({ ...userInput });
          const token = signToken(user);
          return {

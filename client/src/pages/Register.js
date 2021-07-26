@@ -1,31 +1,62 @@
 import React from 'react';
-import {Button, Form} from 'react-bootstrap';
+import { useMutation } from '@apollo/client';
+import { CREATE_USER } from '../utils/mutations';
+import Auth from '../utils/auth';
+
+import { Button, Form } from 'react-bootstrap';
+
 
 function Register() {
+    const [formState, setFormState] = useState({ email: '', username: '', password: '' });
+    const [createUser] = useMutation(CREATE_USER);
+
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+        const mutationResponse = await createUser({
+            variables: {
+                firstname: formState.formFname,
+                lastname: formState.formLname,
+                username: formState.formUsername,
+                email: formState.formBasicEmail,
+                password: formState.formBasicPassword,
+            },
+        });
+        const token = mutationResponse.date.createUser.token;
+        Auth.login(token);
+    };
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormState({
+            ...formState,
+            [name]: value
+        });
+    };
+
     return (
         <div>
             <h1>Create Account</h1>
             <p>Please enter your information to create an account.</p>
             {/* create User, fname, lname  */}
-            <Form>
+            <Form onSubmit={handleFormSubmit}>
                 <Form.Group className="mb-3" controlId="formFname">
                     <Form.Label>First Name </Form.Label>
-                    <Form.Control required type="text" placeholder="Enter first name" />
+                    <Form.Control required type="text" placeholder="Enter first name" onChange={handleChange} />
                 </Form.Group>
-                
+
                 <Form.Group className="mb-3" controlId="formLname">
                     <Form.Label>Last Name </Form.Label>
-                    <Form.Control required type="text" placeholder="Enter last name" />
+                    <Form.Control required type="text" placeholder="Enter last name" onChange={handleChange} />
                 </Form.Group>
-                
+
                 <Form.Group className="mb-3" controlId="formUsername">
                     <Form.Label>Username </Form.Label>
-                    <Form.Control required type="text" placeholder="Enter username" />
+                    <Form.Control required type="text" placeholder="Enter username" onChange={handleChange} />
                 </Form.Group>
-                
+
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address </Form.Label>
-                    <Form.Control required type="email" placeholder="Enter email" />
+                    <Form.Control required type="email" placeholder="Enter email" onChange={handleChange} />
                     <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
                     </Form.Text>
@@ -33,9 +64,9 @@ function Register() {
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password </Form.Label>
-                    <Form.Control required type="password" placeholder="Password" />
+                    <Form.Control required type="password" placeholder="Password" onChange={handleChange} />
                 </Form.Group>
-                
+
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                     <Form.Check required type="checkbox" label="I agree to terms & service" />
                 </Form.Group>

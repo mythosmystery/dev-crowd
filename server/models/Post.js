@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-const commentSchema = require('./Comment');
 
 const postSchema = new Schema(
    {
@@ -11,11 +10,15 @@ const postSchema = new Schema(
          type: Date,
          default: Date.now,
       },
-      likes: [{ type: Schema.ObjectId, ref: 'User' }],
-      comments: [commentSchema],
+      likes: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+      comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
       postedBy: {
-         type: Schema.ObjectId,
+         type: Schema.Types.ObjectId,
          ref: 'User',
+      },
+      username: {
+         type: String,
+         required: true,
       },
    },
    {
@@ -24,14 +27,5 @@ const postSchema = new Schema(
       },
    }
 );
-postSchema.virtual('likeCount').get(() => {
-   return this.likes.length;
-});
-postSchema.virtual('username').get(() => {
-   return this.postedBy.username;
-});
-postSchema.virtual('commentCount').get(() => {
-   return this.comments.length;
-});
 const Post = model('Post', postSchema);
 module.exports = Post;

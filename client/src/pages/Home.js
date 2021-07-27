@@ -9,7 +9,7 @@ function Home() {
     return (
         <Container fluid="md">
             <div>
-                <h1>Welcome to DevCrowd!</h1>
+                <h1 className="text-center">Welcome to DevCrowd!</h1>
                 <Carousel>
                     <Carousel.Item>
                         <img

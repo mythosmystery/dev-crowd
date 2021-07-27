@@ -5,7 +5,7 @@ import Auth from '../utils/auth';
 
 import { Button, Form } from 'react-bootstrap';
 
-function Register(props) {
+function CreateAccount(props) {
    const [formState, setFormState] = useState({ email: '', username: '', password: '', name: '' });
    const [addUser, { error }] = useMutation(ADD_USER);
 
@@ -73,4 +73,4 @@ function Register(props) {
    );
 }
 
-export default Register;
+export default CreateAccount;

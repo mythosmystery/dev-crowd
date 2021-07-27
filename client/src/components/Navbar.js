@@ -29,7 +29,7 @@ const handleItemClick = (e, { name }) => setActiveItem(name);
             to='/login'
           />
             <Menu.Item
-              name='register'
+              name='Create Account'
               active={activeItem === 'register'}
               onClick={handleItemClick}
               as={Link}

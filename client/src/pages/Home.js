@@ -29,7 +29,7 @@ function Home() {
                         />
 
                         <Carousel.Caption>
-                            <h3>Make life long friends!</h3>
+                            <h3>Make life-long friends!</h3>
                         </Carousel.Caption>
                     </Carousel.Item>
                     <Carousel.Item>
@@ -40,7 +40,7 @@ function Home() {
                         />
 
                         <Carousel.Caption>
-                            <h3>Stay connected with you dev friends!</h3>
+                            <h3>Stay connected with your Dev friends!</h3>
                         </Carousel.Caption>
                     </Carousel.Item>
                 </Carousel>

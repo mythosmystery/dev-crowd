@@ -19,7 +19,7 @@ function Register(props) {
             },
          });
          data ? console.log(data) : console.log(error);
-         const token = data.createUser.token;
+         const token = data.addUser.token;
          Auth.login(token);
       } catch (err) {
          console.error(err);

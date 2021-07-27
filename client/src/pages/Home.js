@@ -1,6 +1,6 @@
 import React from "react";
 import logo1 from "../Assets/images/logo1.png";
-import developer_hands from "../Assets/images/developer_hands.jpeg";
+import developer_hands from "../Assets/images/developer_hands.jpg";
 import social_media from "../Assets/images/social_media.jpeg";
 import Container from "react-bootstrap/Container";
 import Carousel from "react-bootstrap/Carousel";
@@ -29,7 +29,6 @@ function Home() {
               alt="devs"
               alt="Second slide"
             />
-
             <Carousel.Caption>
               <h3>Make life-long friends!</h3>
             </Carousel.Caption>

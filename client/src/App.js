@@ -11,6 +11,9 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import CreateAccount from './pages/CreateAccount';
 import Footer from './components/Footer/Footer';
+import Profile from "./pages/Profile"
+
+
 const httpLink = createHttpLink({
    uri: 'http://localhost:3001/graphql',
 });
@@ -41,6 +44,7 @@ function App() {
                <Route exact path="/" component={Home} />
                <Route exact path="/login" component={Login} />
                <Route exact path="/createaccount" component={CreateAccount} />
+               <Route exact path="/Users/:Id" component={Profile} />
             </Container>
             <Footer />
          </Router>

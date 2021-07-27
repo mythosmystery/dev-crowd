@@ -5,41 +5,41 @@ import { Link } from 'react-router-dom';
 function Navbar() {
   const [activeItem, setActiveItem] = useState('home');
 
-const handleItemClick = (e, { name }) => setActiveItem(name);
+  const handleItemClick = (e, { name }) => setActiveItem(name);
 
- 
 
-    return (
-      
-        <Menu pointing secondary color="purple">
-          <Menu.Item
-            name='home'
-            active={activeItem === 'home'}
-            onClick={handleItemClick}
-            as={Link}
-            to='/'
-          />
-         
-          <Menu.Menu position='right'>
-          <Menu.Item
-            name='login'
-            active={activeItem === 'login'}
-            onClick={handleItemClick}
-            as={Link}
-            to='/login'
-          />
-            <Menu.Item
-              name='Create Account'
-              active={activeItem === 'register'}
-              onClick={handleItemClick}
-              as={Link}
-             to='/register'
-            />
-          </Menu.Menu>
-        </Menu>
 
-    )
-  
+  return (
+
+    <Menu pointing secondary color="purple">
+      <Menu.Item
+        name='home'
+        active={activeItem === 'home'}
+        onClick={handleItemClick}
+        as={Link}
+        to='/'
+      />
+
+      <Menu.Menu position='right'>
+        <Menu.Item
+          name='login'
+          active={activeItem === 'login'}
+          onClick={handleItemClick}
+          as={Link}
+          to='/login'
+        />
+        <Menu.Item
+          name='Create Account'
+          active={activeItem === 'create account'}
+          onClick={handleItemClick}
+          as={Link}
+          to='/createaccount'
+        />
+      </Menu.Menu>
+    </Menu>
+
+  )
+
 }
 
 export default Navbar;

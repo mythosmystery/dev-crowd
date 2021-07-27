@@ -3,7 +3,8 @@ import { Feed, Grid, Icon, Image } from 'semantic-ui-react'
 
 
 function Profile() {
-    
+
+
     return (
 
         <Grid celled>
@@ -12,7 +13,7 @@ function Profile() {
             </Grid.Row>
 
             <Grid.Row>
-                <Grid.Column width={3}>
+                <Grid.Column width={5}>
                     <h5> Followers</h5>
                 </Grid.Column>
                 <Grid.Column width={11}>

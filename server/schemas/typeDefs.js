@@ -12,7 +12,7 @@ const typeDefs = gql`
    type Post {
       _id: ID
       content: String!
-      date: Int!
+      date: Float!
       likes: [User]
       comments: [Comment]
       postedBy: User
@@ -21,7 +21,7 @@ const typeDefs = gql`
    type Comment {
       _id: ID
       content: String!
-      date: Int!
+      date: Float!
       likes: [User]
       postedBy: User
       postedOn: Post

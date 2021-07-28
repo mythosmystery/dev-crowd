@@ -1,4 +1,4 @@
-const { Post, Comment } = require('../../models');
+const { Post, Comment, User } = require('../../models');
 module.exports = {
    Query: {
       posts: async () => {
@@ -16,6 +16,7 @@ module.exports = {
       },
       postsByUser: async (parent, { username }) => {
          return Post.find({ username })
+            .sort({ date: -1 })
             .populate('postedBy')
             .populate('likes')
             .populate({ path: 'comments', populate: { path: 'postedBy' } });
@@ -23,7 +24,6 @@ module.exports = {
    },
    Mutation: {
       addPost: async (parent, { content }, { user }) => {
-         console.log(user._id);
          const post = await Post.create({
             content: content,
             postedBy: user._id,

@@ -1,41 +1,77 @@
 import React, { useState } from "react";
-import { Menu } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import { Navbar, Nav, Container, Modal, Tab } from "react-bootstrap";
+import SignUpForm from "../pages/CreateAccount";
+import LoginForm from "../pages/Login";
 
-function Navbar() {
-  const [activeItem, setActiveItem] = useState("home");
+import Auth from "../utils/auth";
 
-  const handleItemClick = (e, { name }) => setActiveItem(name);
+const AppNavbar = () => {
+  // set modal display state
+  const [showModal, setShowModal] = useState(false);
 
   return (
-    <Menu pointing secondary color="purple">
-      <Menu.Item
-        name="home"
-        active={activeItem === "home"}
-        onClick={handleItemClick}
-        as={Link}
-        to="/"
-      />
-      <br />
-      <Menu.Menu position="right">
-        <Menu.Item
-          name="login"
-          active={activeItem === "login"}
-          onClick={handleItemClick}
-          as={Link}
-          to="/login"
-        />{" "}
-        <br />
-        <Menu.Item
-          name="Create Account"
-          active={activeItem === "create account"}
-          onClick={handleItemClick}
-          as={Link}
-          to="/createaccount"
-        />
-      </Menu.Menu>
-    </Menu>
+    <>
+      <Navbar bg="dark" variant="dark" expand="lg">
+        <Container fluid>
+          <Navbar.Brand as={Link} to="/">
+            DevCrowd
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="navbar" />
+          <Navbar.Collapse id="navbar">
+            <Nav className="ml-auto">
+              <Nav.Link as={Link} to="/">
+                Home
+              </Nav.Link>
+              {/* if user is logged in show logout */}
+              {Auth.loggedIn() ? (
+                <>
+                  <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
+                </>
+              ) : (
+                <Nav.Link onClick={() => setShowModal(true)}>
+                  Login/Sign Up
+                </Nav.Link>
+              )}
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      {/* set modal data up */}
+      <Modal
+        size="lg"
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        aria-labelledby="signup-modal"
+      >
+        {/* tab container to do either create account or login component */}
+        <Tab.Container defaultActiveKey="login">
+          <Modal.Header closeButton>
+            <Modal.Title id="signup-modal">
+              <Nav variant="pills">
+                <Nav.Item>
+                  <Nav.Link eventKey="login">Login</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="signup">Create Account</Nav.Link>
+                </Nav.Item>
+              </Nav>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Tab.Content>
+              <Tab.Pane eventKey="login">
+                <LoginForm handleModalClose={() => setShowModal(false)} />
+              </Tab.Pane>
+              <Tab.Pane eventKey="signup">
+                <SignUpForm handleModalClose={() => setShowModal(false)} />
+              </Tab.Pane>
+            </Tab.Content>
+          </Modal.Body>
+        </Tab.Container>
+      </Modal>
+    </>
   );
-}
+};
 
-export default Navbar;
+export default AppNavbar;

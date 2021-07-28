@@ -1,4 +1,4 @@
-const { Post, Comment } = require('../../models');
+const { Post, Comment, User } = require('../../models');
 module.exports = {
    Query: {
       posts: async () => {

@@ -1,40 +1,35 @@
-import gql from "@apollo/client"
-
+import gql from '@apollo/client';
 
 export const GET_ME = gql`
-{
-    me {
-        _id
-        username
-        name
-        followers {
+   {
+      me {
+         _id
+         username
+         name
+         followers {
             username
+            _id
+         }
+         following {
+            username
+            _id
+         }
+      }
+   }
+`;
+export const POST_BY_USER = gql`
+   query postsByUser($username: String!) {
+      postsByUser(username: $username) {
+         _id
+         content
+         date
+         postedBy {
+            _id
             name
-        }
-        following  {
-            username
-            name
-        }
-    }
-}
-
-`
-
-export const FETCH_POSTS_QUERY = gql`
-{
-    getPosts {
-        id
-        content 
-        date
-        likes {
-            username
-        }
-        comments{
-            id
-            username
-            date
-            content
-        }
-    }
-}
-`
+         }
+         likes {
+            _id
+         }
+      }
+   }
+`;

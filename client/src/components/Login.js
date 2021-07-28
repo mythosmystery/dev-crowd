@@ -6,7 +6,7 @@ import Auth from '../utils/auth';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-function Login(props) {
+function Login({ route }) {
    const [formState, setFormState] = useState({ email: '', password: '' });
    const [login, { error }] = useMutation(LOGIN_USER);
 
@@ -18,7 +18,7 @@ function Login(props) {
             variables: { ...formState },
          });
          const token = data.login.token;
-         Auth.login(token);
+         Auth.login(token, route);
       } catch (error) {
          console.log(error);
       }
@@ -43,8 +43,8 @@ function Login(props) {
             <Form.Label htmlFor="password">Password</Form.Label>
             <Form.Control type="password" name="password" placeholder="Password" onChange={handleChange} value={formState.password} />
          </Form.Group>
-         <Button variant="primary" type="submit">
-            Submit
+         <Button disabled={!(formState.email && formState.password)} type="submit" variant="success">
+            Login
          </Button>
       </Form>
    );

@@ -8,8 +8,6 @@ import './App.css';
 
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
-import Login from './pages/Login';
-import CreateAccount from './pages/CreateAccount';
 import Footer from './components/Footer/Footer';
 import Profile from './pages/Profile';
 
@@ -39,11 +37,9 @@ function App() {
       <ApolloProvider client={client}>
          <Router>
             <Container>
-               <Navbar />
+               <Navbar authRoute="/profile" />
                <Route exact path="/" component={Home} />
-               <Route exact path="/login" component={Login} />
-               <Route exact path="/createaccount" component={CreateAccount} />
-               <Route exact path="/Users/:Id" component={Profile} />
+               <Route exact path="/profile" component={Profile} />
             </Container>
             <Footer />
          </Router>

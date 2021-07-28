@@ -11,11 +11,10 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import CreateAccount from './pages/CreateAccount';
 import Footer from './components/Footer/Footer';
-import Profile from "./pages/Profile"
-
+import Profile from './pages/Profile';
 
 const httpLink = createHttpLink({
-   uri: 'http://localhost:3001/graphql',
+   uri: '/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {

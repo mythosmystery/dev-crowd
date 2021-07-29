@@ -27,37 +27,27 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_POST = gql`
-   mutation createPost($content: String!) {
-      createPost(content: $content) {
-         id
+   mutation addPost($content: String!) {
+      addPost(content: $content) {
+         _id
          content
          username
          date
-         likes {
-            id
-            username
-         }
-         likeCount
-         comments {
-            id
-            content
-            username
-            date
-         }
       }
    }
 `;
 
 export const ADD_COMMENT = gql`
    mutation ($postID: ID!, $content: String!) {
-      addComment(postId: $postId, conttent: $content) {
-         id
+      addComment(postId: $postId, content: $content) {
+         _id
+         content
+         username
          comments {
             id
             content
             username
          }
-         commentCount
       }
    }
 `;

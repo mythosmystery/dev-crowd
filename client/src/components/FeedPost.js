@@ -3,41 +3,33 @@ import { useMutation } from '@apollo/client';
 import { POST_BY_USER } from '../utils/queries';
 import { ADD_POST } from '../utils/mutations';
 import { Button, Form } from 'react-bootstrap';
-import { useForm } from '../utils/hooks'
+import { useForm } from '../utils/hooks';
 
 function FeedPost() {
-    const { values, onChange, onSubmit } = useForm(createPostCallback, {
-        content: ''
-    });
+   const [addPost, { error }] = useMutation(ADD_POST);
 
-    const [createPost, { error }] = useMutation(ADD_POST, {
-        variables: values,
-        update(proxy, result) {
-            const data = proxy.readQuery({
-                query: POST_BY_USER
-            });
-            data.getPosts = [result.data.createPost, ...data.getPosts];
-            proxy.writeQuery({ query: POST_BY_USER, data });
-            values.content = ''
-        }
-    });
+   const handleFormSubmit = async () => {
+      try {
+         const { data } = await addPost({ variables: { ...formState } });
+         console.log(data);
+      } catch (err) {
+         console.error(err);
+      }
+   };
 
-    function createPostCallback() {
-        createPost();
-    }
+   const { formState, onChange, onSubmit } = useForm(handleFormSubmit);
 
-    return (
-        <Form onSubmit={onSubmit}>
-            <h2> Create a post:</h2>
-            <Form.Group>
-                <Form.Control type="content" placeholder="What's on your mind" />
-                <Button type="submit" color="dark blue">
-                    Submit
-                </Button>
-
-            </Form.Group>
-        </Form >
-    )
+   return (
+      <Form onSubmit={onSubmit}>
+         <h2> Create a post:</h2>
+         <Form.Group>
+            <Form.Control type="content" placeholder="What's on your mind" name="content" value={formState.content} onChange={onChange} />
+            <Button type="submit" color="dark blue">
+               Submit
+            </Button>
+         </Form.Group>
+      </Form>
+   );
 }
 
 export default FeedPost;

@@ -1,18 +1,20 @@
 import React from 'react';
 import { Feed, Grid, Icon, Image } from 'semantic-ui-react'
-
+import FeedPost from '../components/FeedPost';
 
 function Profile() {
-    
+
+
     return (
 
         <Grid celled>
             <Grid.Row>
-                <h3> Add Feed Post here</h3>
+                <FeedPost />
+
             </Grid.Row>
 
             <Grid.Row>
-                <Grid.Column width={3}>
+                <Grid.Column width={5}>
                     <h5> Followers</h5>
                 </Grid.Column>
                 <Grid.Column width={11}>

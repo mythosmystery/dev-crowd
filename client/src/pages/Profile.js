@@ -1,23 +1,30 @@
 import React from 'react';
-import { Feed, Grid, Icon, Image } from 'semantic-ui-react';
-import FeedPost from '../components/FeedPost';
+import { Col, Row, Container } from 'react-bootstrap';
+import MakePost from '../components/MakePost';
+import Auth from '../utils/auth';
+import ProfileFeed from '../components/ProfileFeed';
+import { useQuery } from '@apollo/client';
+import { POST_BY_USER } from '../utils/queries';
+import FollowingList from '../components/FollowingList';
 
 function Profile() {
-   return (
-      <Grid celled>
-         <Grid.Row>
-            <FeedPost />
-         </Grid.Row>
+   const { username } = Auth.getProfile();
+   const { data, error, loading, refetch } = useQuery(POST_BY_USER, { variables: { username } });
 
-         <Grid.Row>
-            <Grid.Column width={5}>
-               <h5> Followers</h5>
-            </Grid.Column>
-            <Grid.Column width={11}>
-               <h5> Feed Activity</h5>
-            </Grid.Column>
-         </Grid.Row>
-      </Grid>
+   return (
+      <Container>
+         <Row>
+            <Col md={3}>
+               <FollowingList />
+            </Col>
+            <Col xs={12} md={9}>
+               <Row className="my-3">
+                  <Col>{Auth.loggedIn() ? <MakePost refetch={refetch} /> : <h2>Please Log in</h2>}</Col>
+               </Row>
+               <Row className="my-2">{data ? <ProfileFeed posts={data.postsByUser} /> : <h2>Error loading posts</h2>}</Row>
+            </Col>
+         </Row>
+      </Container>
    );
 }
 

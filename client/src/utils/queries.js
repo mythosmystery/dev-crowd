@@ -7,10 +7,12 @@ export const GET_ME = gql`
          username
          name
          followers {
+            name
             username
             _id
          }
          following {
+            name
             username
             _id
          }

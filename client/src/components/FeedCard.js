@@ -1,33 +1,17 @@
-import React, { useContext } from 'react';
-import { Feed, Icon, Label, Image } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
-import { Auth } from '../utils/auth';
+import React from 'react';
+import { Card } from 'react-bootstrap';
 import moment from 'moment';
-import LikePostButton from './LikeButton';
 
-function FeedCard({ post: { content, date, id, username, likes } }) {
+function FeedCard({ post }) {
+   const datePosted = moment(post.date).format('h:mm a');
    return (
-      <Feed.Event>
-         <Feed.Label>
-            <img src="/images/avatar/small/elliot.jpg" />
-         </Feed.Label>
-         <Feed.Content>
-            <Feed.Summary>
-               <Feed.User>{username}</Feed.User> {action}
-               <Feed.Date>{date}</Feed.Date>
-            </Feed.Summary>
-            <Feed.Meta as={Link} to={`/posts/${id}`}>
-               <Feed.Extra>{content}</Feed.Extra>
-            </Feed.Meta>
-            <Feed.Meta>
-               <Feed.Like>
-                  <Icon name="like" />
-                  {likes.length}
-               </Feed.Like>
-            </Feed.Meta>
-         </Feed.Content>
-      </Feed.Event>
+      <>
+         <Card className="my-2">
+            <Card.Header>{post.postedBy.name}</Card.Header>
+            <Card.Title className="m-1">{post.content}</Card.Title>
+            <Card.Text>Posted at {datePosted}</Card.Text>
+         </Card>
+      </>
    );
 }
-
 export default FeedCard;

@@ -25,6 +25,7 @@ export const POST_BY_USER = gql`
          _id
          content
          date
+         username
          postedBy {
             _id
             name

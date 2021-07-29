@@ -21,7 +21,7 @@ function Profile() {
                <Row className="my-3">
                   <Col>{Auth.loggedIn() ? <MakePost refetch={refetch} /> : <h2>Please Log in</h2>}</Col>
                </Row>
-               <Row className="my-2">{data ? <ProfileFeed posts={data.postsByUser} /> : <h2>Error loading posts</h2>}</Row>
+               <Row className="my-2">{data ? <ProfileFeed posts={data.postsByUser} refetch={refetch} /> : <h2>Error loading posts</h2>}</Row>
             </Col>
          </Row>
       </Container>

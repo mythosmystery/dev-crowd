@@ -25,6 +25,26 @@ export const LOGIN_USER = gql`
       }
    }
 `;
+export const FOLLOW_USER = gql`
+   mutation followUser($userId: ID!) {
+      followUser(userId: $userId) {
+         username
+         followers {
+            username
+         }
+      }
+   }
+`;
+export const UNFOLLOW_USER = gql`
+   mutation unfollowUser($userId: ID!) {
+      unfollowUser(userId: $userId) {
+         username
+         followers {
+            username
+         }
+      }
+   }
+`;
 
 export const ADD_POST = gql`
    mutation addPost($content: String!) {
@@ -60,15 +80,7 @@ export const REMOVE_POST = gql`
 
 export const REMOVE_COMMENT = gql`
    mutation removeComment($commentId: ID!) {
-      removeComment(commentId: $commentId) {
-         id
-         comments {
-            id
-            username
-            content
-         }
-         commentCount
-      }
+      removeComment(commentId: $commentId)
    }
 `;
 

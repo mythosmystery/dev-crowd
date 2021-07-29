@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
-import CreateAccount from './CreateAccount';
-import Login from './Login';
-
+import { Navbar, Nav, Container } from 'react-bootstrap';
+import AccountModal from './AccountModal';
+import SearchModal from './SearchModal';
 import Auth from '../utils/auth';
 
 const AppNavbar = ({ authRoute }) => {
    // set modal display state
-   const [showModal, setShowModal] = useState(false);
+   const [showAccountModal, setShowAccountModal] = useState(false);
+   const [showSearchModal, setShowSearchModal] = useState(false);
 
    return (
       <>
@@ -23,6 +23,7 @@ const AppNavbar = ({ authRoute }) => {
                      <Nav.Link as={Link} to="/">
                         Home
                      </Nav.Link>
+                     <Nav.Link onClick={() => setShowSearchModal(true)}>Search</Nav.Link>
                      {/* if user is logged in show logout */}
                      {Auth.loggedIn() ? (
                         <>
@@ -32,40 +33,14 @@ const AppNavbar = ({ authRoute }) => {
                            </Nav.Link>
                         </>
                      ) : (
-                        <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
+                        <Nav.Link onClick={() => setShowAccountModal(true)}>Login/Sign Up</Nav.Link>
                      )}
                   </Nav>
                </Navbar.Collapse>
             </Container>
          </Navbar>
-
-         <Modal size="lg" show={showModal} onHide={() => setShowModal(false)} aria-labelledby="signup-modal">
-            {/* tab container to either create account or login component */}
-            <Tab.Container defaultActiveKey="login">
-               <Modal.Header closeButton>
-                  <Modal.Title id="signup-modal">
-                     <Nav variant="pills">
-                        <Nav.Item>
-                           <Nav.Link eventKey="login">Login</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                           <Nav.Link eventKey="signup">Create Account</Nav.Link>
-                        </Nav.Item>
-                     </Nav>
-                  </Modal.Title>
-               </Modal.Header>
-               <Modal.Body>
-                  <Tab.Content>
-                     <Tab.Pane eventKey="login">
-                        <Login handleModalClose={() => setShowModal(false)} route={authRoute} />
-                     </Tab.Pane>
-                     <Tab.Pane eventKey="signup">
-                        <CreateAccount handleModalClose={() => setShowModal(false)} route={authRoute} />
-                     </Tab.Pane>
-                  </Tab.Content>
-               </Modal.Body>
-            </Tab.Container>
-         </Modal>
+         <SearchModal showModal={showSearchModal} onHide={() => setShowSearchModal(false)} />
+         <AccountModal showModal={showAccountModal} onHide={() => setShowAccountModal(false)} authRoute={authRoute} />
       </>
    );
 };

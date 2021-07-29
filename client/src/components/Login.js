@@ -2,18 +2,16 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
-
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import { Button, Form } from 'react-bootstrap';
 
 function Login({ route }) {
    const [formState, setFormState] = useState({ email: '', password: '' });
    const [login, { error }] = useMutation(LOGIN_USER);
 
-   const handleFormSumbit = async (event) => {
+   const handleFormSubmit = async (event) => {
       event.preventDefault();
       try {
-         console.log({ ...formState });
+         //console.log({ ...formState });
          const { data } = await login({
             variables: { ...formState },
          });
@@ -33,7 +31,7 @@ function Login({ route }) {
    };
 
    return (
-      <Form onSubmit={handleFormSumbit}>
+      <Form onSubmit={handleFormSubmit}>
          <Form.Group className="mb-3">
             <Form.Label htmlFor="email">Email</Form.Label>
             <Form.Control type="text" name="email" placeholder="Enter email" onChange={handleChange} value={formState.email} />

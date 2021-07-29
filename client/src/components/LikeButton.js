@@ -1,32 +1,39 @@
-
 import React, { useEffect, useState } from 'react';
-import { useMutation } from '@apollo/react-hooks';
-import { LIKE_POST } from '../utils/mutations';
-import { Button, Label } from 'semantic-ui-react';
+import { useMutation } from '@apollo/client';
+import { LIKE_POST, UNLIKE_POST } from '../utils/mutations';
+import { Button } from 'react-bootstrap';
 
-function LikePostButton({ user, post: { id, likeCount, likes } }) {
+function LikeButton({ likes, id, postId }) {
+   const [liked, setLiked] = useState(false);
+   const [likePost] = useMutation(LIKE_POST);
+   const [unlikePost] = useMutation(UNLIKE_POST);
 
-    const [liked, setLiked] = useState(false);
+   useEffect(() => {
+      likes.forEach(({ _id }) => {
+         if (_id === id) setLiked(true);
+      });
+   }, [likes, id]);
 
-    useEffect(() => {
-        if (user && likes.find((like) => like.username === user.username)) {
-            setLiked(true);
-        } else setLiked(false);
-    }, (user, likes));
+   const handleClick = ({ target }) => {
+      if (liked) handleUnlike();
+      if (!liked) handleLike();
+   };
 
-    const [likePost] = useMutation(LIKE_POST, {
-        variable: { postId: id }
-    });
+   const handleLike = async () => {
+      setLiked(true);
+      const { data } = await likePost({ variables: { postId } });
+   };
 
+   const handleUnlike = async () => {
+      setLiked(false);
+      const { data } = await unlikePost({ variables: { postId } });
+   };
 
-    return (
-        <Button as="div" labelPosition="right" onClick={likePost}>
-            <Label pointing="left">
-                {likeCount}
-            </Label>
-        </Button>
-    );
-
+   return (
+      <Button className="mx-3" variant={!liked ? 'primary' : 'warning'} size="sm" onClick={handleClick}>
+         {!liked ? 'Like' : 'Unlike'}
+      </Button>
+   );
 }
 
-export default LikePostButton
+export default LikeButton;

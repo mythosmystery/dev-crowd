@@ -25,39 +25,49 @@ export const LOGIN_USER = gql`
       }
    }
 `;
+export const FOLLOW_USER = gql`
+   mutation followUser($userId: ID!) {
+      followUser(userId: $userId) {
+         username
+         followers {
+            username
+         }
+      }
+   }
+`;
+export const UNFOLLOW_USER = gql`
+   mutation unfollowUser($userId: ID!) {
+      unfollowUser(userId: $userId) {
+         username
+         followers {
+            username
+         }
+      }
+   }
+`;
 
 export const ADD_POST = gql`
-   mutation createPost($content: String!) {
-      createPost(content: $content) {
-         id
+   mutation addPost($content: String!) {
+      addPost(content: $content) {
+         _id
          content
          username
          date
-         likes {
-            id
-            username
-         }
-         likeCount
-         comments {
-            id
-            content
-            username
-            date
-         }
       }
    }
 `;
 
 export const ADD_COMMENT = gql`
    mutation ($postID: ID!, $content: String!) {
-      addComment(postId: $postId, conttent: $content) {
-         id
+      addComment(postId: $postId, content: $content) {
+         _id
+         content
+         username
          comments {
             id
             content
             username
          }
-         commentCount
       }
    }
 `;
@@ -70,31 +80,32 @@ export const REMOVE_POST = gql`
 
 export const REMOVE_COMMENT = gql`
    mutation removeComment($commentId: ID!) {
-      removeComment(commentId: $commentId) {
-         id
-         comments {
-            id
-            username
-            content
-         }
-         commentCount
-      }
+      removeComment(commentId: $commentId)
    }
 `;
 
 export const LIKE_POST = gql`
    mutation likePost($postId: ID!) {
       likePost(postId: $postId) {
-         id
+         _id
          likes {
-            id
+            _id
             username
          }
-         likeCount
       }
    }
 `;
-
+export const UNLIKE_POST = gql`
+   mutation unlikePost($postId: ID!) {
+      unlikePost(postId: $postId) {
+         _id
+         likes {
+            _id
+            username
+         }
+      }
+   }
+`;
 export const LIKE_COMMENT = gql`
    mutation likeCommnet($commentId: ID!) {
       likeComment(commentId: $commentId) {

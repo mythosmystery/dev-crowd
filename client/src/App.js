@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { Container } from 'semantic-ui-react';
+import { Container } from 'react-bootstrap';
+import Auth from './utils/auth';
 
 import './App.css';
 
@@ -10,6 +11,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Footer from './components/Footer/Footer';
 import Profile from './pages/Profile';
+import Newsfeed from './pages/Newsfeed';
 
 const httpLink = createHttpLink({
    uri: '/graphql',
@@ -33,12 +35,13 @@ const client = new ApolloClient({
 });
 
 function App() {
+   const homePage = Auth.loggedIn() ? Newsfeed : Home;
    return (
       <ApolloProvider client={client}>
          <Router>
+            <Navbar authRoute="/profile" />
             <Container>
-               <Navbar authRoute="/profile" />
-               <Route exact path="/" component={Home} />
+               <Route exact path="/" component={homePage} />
                <Route exact path="/profile" component={Profile} />
             </Container>
             <Footer />

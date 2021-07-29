@@ -44,9 +44,12 @@ const typeDefs = gql`
       user(userId: ID!): User
       me: User!
 
+      newsfeed(usernames: [String]!): [Post]
+
       posts: [Post]!
       post(postId: ID!): Post
       postsByUser(username: String!): [Post]
+      myPosts: [Post]
 
       comments: [Comment]
       comment(commenttId: ID!): Comment
@@ -62,6 +65,7 @@ const typeDefs = gql`
       addPost(content: String!): Post
       removePost(postId: ID!): String
       likePost(postId: ID!): Post
+      unlikePost(postId: ID!): Post
 
       addComment(content: String!, postId: ID!): Post
       removeComment(commentId: ID!): String

@@ -4,7 +4,7 @@ import "./style.css"
 
 const Footer = () => {
     return (
-        <footer className="footer mt-auto py-3">
+        <footer className="footer mt-5">
             <div className="container">
                 <div className="text-center">
                     <span className="text-muted">&copy; 2021 DevCrowd</span>

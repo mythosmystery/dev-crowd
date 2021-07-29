@@ -1,34 +1,44 @@
 import React from 'react';
-import { Feed, Grid, Icon, Image } from 'semantic-ui-react'
-import FeedPost from '../components/FeedPost';
+import { Col, Row, Container } from 'react-bootstrap';
+import MakePost from '../components/MakePost';
+import Auth from '../utils/auth';
+import ProfileFeed from '../components/ProfileFeed';
+import ProfileCard from '../components/ProfileCard';
+import { useQuery } from '@apollo/client';
+import { POST_BY_USER, GET_ME } from '../utils/queries';
+import FollowingList from '../components/FollowingList';
 
 function Profile() {
+   const { username } = Auth.getProfile();
+   const { data, error, loading, refetch } = useQuery(POST_BY_USER, { variables: { username } });
+   const meQuery = useQuery(GET_ME);
 
+   if (loading || meQuery.loading) return <h2>loading</h2>;
 
-    return (
-
-        <Grid celled>
-            <Grid.Row>
-                <FeedPost />
-
-            </Grid.Row>
-
-            <Grid.Row>
-                <Grid.Column width={5}>
-                    <h5> Followers</h5>
-                </Grid.Column>
-                <Grid.Column width={11}>
-                    <h5> Feed Activity</h5>
-
-                </Grid.Column>
-            </Grid.Row>
-
-
-        </Grid>
-
-    );
+   const { me } = meQuery.data;
+   console.log(me);
+   return (
+      <Container>
+         <Row>
+            <Col md={3}>
+               <Row>
+                  <ProfileCard user={me} />
+               </Row>
+               <Row>
+                  <FollowingList />
+               </Row>
+            </Col>
+            <Col xs={12} md={9}>
+               <Row className="my-3">
+                  <Col>
+                     <MakePost refetch={refetch} loggedIn={Auth.loggedIn()} />
+                  </Col>
+               </Row>
+               <Row className="my-2">{data ? <ProfileFeed posts={data.postsByUser} refetch={refetch} /> : <h2>Loading posts</h2>}</Row>
+            </Col>
+         </Row>
+      </Container>
+   );
 }
-
-
 
 export default Profile;

@@ -39,8 +39,8 @@ function App() {
    return (
       <ApolloProvider client={client}>
          <Router>
+            <Navbar authRoute="/profile" />
             <Container>
-               <Navbar authRoute="/profile" />
                <Route exact path="/" component={homePage} />
                <Route exact path="/profile" component={Profile} />
             </Container>

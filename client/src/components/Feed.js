@@ -1,6 +1,6 @@
 import React from 'react';
 import FeedCard from './FeedCard';
-import { useQuery, useLazyQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { NEWSFEED } from '../utils/queries';
 import { Container } from 'react-bootstrap';
 function Feed({ user }) {

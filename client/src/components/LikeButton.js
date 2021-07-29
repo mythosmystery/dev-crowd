@@ -30,7 +30,7 @@ function LikeButton({ likes, id, postId }) {
    };
 
    return (
-      <Button variant={!liked ? 'primary' : 'warning'} size="sm" onClick={handleClick}>
+      <Button className="mx-3" variant={!liked ? 'primary' : 'warning'} size="sm" onClick={handleClick}>
          {!liked ? 'Like' : 'Unlike'}
       </Button>
    );

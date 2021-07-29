@@ -7,12 +7,15 @@ import MakePost from '../components/MakePost';
 import Feed from '../components/Feed';
 import Auth from '../utils/auth';
 function Newsfeed() {
-   const { data, refetch } = useQuery(GET_ME);
+   const { data, loading, refetch } = useQuery(GET_ME);
+   if (loading) return <h2>Loading</h2>;
    return (
       <Container>
          <Row>
             <Col md={3}>
-               <FollowingList />
+               <Row>
+                  <FollowingList />
+               </Row>
             </Col>
             <Col xs={12} md={9}>
                <Row className="my-3">

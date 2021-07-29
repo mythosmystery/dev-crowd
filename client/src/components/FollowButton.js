@@ -14,6 +14,7 @@ function FollowButton({ id }) {
       data.me.following.forEach(({ _id }) => {
          if (_id === id) setIsFollowing(true);
       });
+      return () => {};
    }, [data.me.following, id]);
 
    const handleClick = (event) => {

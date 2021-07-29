@@ -26,5 +26,9 @@ module.exports = {
          const comment = await Comment.findOneAndUpdate({ _id: commentId }, { $addToSet: { likes: user._id } }, { new: true }).populate('likes');
          return comment;
       },
+      unlikeComment: async (parent, { commentId }, { user }) => {
+         const comment = await Comment.findOneAndUpdate({ _id: commentId }, { $pull: { likes: user._id } }, { new: true }).populate('likes');
+         return comment;
+      },
    },
 };

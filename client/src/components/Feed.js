@@ -8,10 +8,14 @@ import Auth from '../utils/auth';
 
 function Feed({ user }) {
    const usernames = user.following.map(({ username }) => username);
-   const { data, loading, refetch } = useQuery(NEWSFEED, { variables: { usernames } });
+   const { data, loading, error, refetch } = useQuery(NEWSFEED, { variables: { usernames } });
 
    if (loading) {
       return <h2>Loading...</h2>;
+   }
+   if (error) {
+      console.log(error);
+      return <h2>error</h2>;
    }
    return (
       <>

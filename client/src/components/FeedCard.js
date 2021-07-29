@@ -5,6 +5,7 @@ import Auth from '../utils/auth';
 import { useMutation } from '@apollo/client';
 import { REMOVE_POST } from '../utils/mutations';
 import LikeButton from './LikeButton';
+import CommentSection from './CommentSection';
 
 function FeedCard({ post, refetch }) {
    const { _id } = Auth.getProfile();
@@ -37,6 +38,7 @@ function FeedCard({ post, refetch }) {
                   <LikeButton likes={post.likes} id={_id} postId={post._id} />
                )}
             </Card.Footer>
+            <CommentSection comments={post.comments} refetch={refetch} postId={post._id} />
          </Card>
       </>
    );

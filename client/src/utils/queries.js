@@ -66,6 +66,9 @@ export const NEWSFEED = gql`
             content
             date
             username
+            postedOn {
+               _id
+            }
             postedBy {
                _id
                name
@@ -73,6 +76,7 @@ export const NEWSFEED = gql`
             likes {
                _id
                username
+               name
             }
          }
          postedBy {
@@ -83,6 +87,7 @@ export const NEWSFEED = gql`
          likes {
             _id
             username
+            name
          }
       }
    }
@@ -94,12 +99,26 @@ export const POST_BY_USER = gql`
          content
          date
          username
+         comments {
+            _id
+            content
+            date
+            username
+            postedOn {
+               _id
+            }
+            postedBy {
+               _id
+               name
+            }
+         }
          postedBy {
             _id
             name
          }
          likes {
             _id
+            name
          }
       }
    }

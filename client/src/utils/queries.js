@@ -104,6 +104,10 @@ export const POST_BY_USER = gql`
             content
             date
             username
+            likes {
+               _id
+               name
+            }
             postedOn {
                _id
             }

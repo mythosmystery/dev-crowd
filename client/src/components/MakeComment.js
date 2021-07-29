@@ -31,7 +31,6 @@ function MakeComment({ refetch, postId }) {
 
    return (
       <Card>
-         <Card.Header>Make a post!</Card.Header>
          <Card.Body>
             <Form onSubmit={onSubmit}>
                <Form.Group>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Feed, Grid, Icon, Image } from 'semantic-ui-react'
-
+import FeedPost from '../components/FeedPost';
 
 function Profile() {
 
@@ -9,7 +9,8 @@ function Profile() {
 
         <Grid celled>
             <Grid.Row>
-                <h3> Add Feed Post here</h3>
+                <FeedPost />
+
             </Grid.Row>
 
             <Grid.Row>

@@ -1,24 +1,43 @@
-import React, { useState } from 'react';
-import gql from '@apollo/client';
+import React from 'react';
 import { useMutation } from '@apollo/client';
+import { POST_BY_USER } from '../utils/queries';
+import { CREATE_POST } from '../utils/mutations';
+import { Button, Form } from 'react-bootstrap';
+import { useForm } from '../utils/hooks'
 
+function FeedPost() {
+    const { values, onChange, onSubmit } = useForm(createPostCallback, {
+        content: ''
+    });
 
-const useForm = (callback, initalState = {}) => {
-    const [values, setValues] = useState(initalState);
+    const [createPost, { error }] = useMutation(CREATE_POST, {
+        variables: values,
+        update(proxy, result) {
+            const data = proxy.readQuery({
+                query: POST_BY_USER
+            });
+            data.getPosts = [result.data.createPost, ...data.getPosts];
+            proxy.writeQuery({ query: POST_BY_USER, data });
+            values.content = ''
+        }
+    });
 
-    const onChange = (event) => {
-        setValues({ ...values, [event.target.name]: event.target.values })
-    };
+    function createPostCallback() {
+        createPost();
+    }
 
-    const onSumbit = (event) => {
-        event.preventDefault();
-        callback();
-    };
+    return (
+        <Form onSubmit={onSubmit}>
+            <h2> Create a post:</h2>
+            <Form.Group>
+                <Form.Control type="content" placeholder="What's on your mind" />
+                <Button type="submit" color="dark blue">
+                    Submit
+                </Button>
 
-    return {
-        onChange,
-        onSumbit,
-        values
-    };
-};
+            </Form.Group>
+        </Form >
+    )
+}
 
+export default FeedPost;

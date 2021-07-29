@@ -2,7 +2,7 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
    type User {
-      _id: ID
+      _id: ID!
       username: String!
       name: String
       email: String!
@@ -10,7 +10,7 @@ const typeDefs = gql`
       following: [User]
    }
    type Post {
-      _id: ID
+      _id: ID!
       content: String!
       date: Float!
       likes: [User]
@@ -19,7 +19,7 @@ const typeDefs = gql`
       username: String
    }
    type Comment {
-      _id: ID
+      _id: ID!
       content: String!
       date: Float!
       likes: [User]
@@ -42,6 +42,7 @@ const typeDefs = gql`
    type Query {
       users: [User]!
       user(userId: ID!): User
+      searchUser(username: String!): [User]
       me: User!
 
       newsfeed(usernames: [String]!): [Post]
@@ -69,7 +70,8 @@ const typeDefs = gql`
 
       addComment(content: String!, postId: ID!): Post
       removeComment(commentId: ID!): String
-      likeComment(commentId: ID!): Post
+      likeComment(commentId: ID!): Comment
+      unlikeComment(commentId: ID!): Comment
    }
 `;
 

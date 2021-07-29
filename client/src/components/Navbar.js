@@ -27,6 +27,9 @@ const AppNavbar = ({ authRoute }) => {
               {Auth.loggedIn() ? (
                 <>
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
+                  <Nav.Link as={Link} to="/Profile">
+                    Profile
+                  </Nav.Link>
                 </>
               ) : (
                 <Nav.Link onClick={() => setShowModal(true)}>
@@ -34,9 +37,7 @@ const AppNavbar = ({ authRoute }) => {
                 </Nav.Link>
               )}
             </Nav>
-            <Nav.Link as={Link} to="/Profile">
-              Profile
-            </Nav.Link>
+
           </Navbar.Collapse>
         </Container>
       </Navbar>

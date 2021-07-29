@@ -1,7 +1,7 @@
 import React from 'react';
 import { useMutation } from '@apollo/client';
 import { POST_BY_USER } from '../utils/queries';
-import { CREATE_POST } from '../utils/mutations';
+import { ADD_POST } from '../utils/mutations';
 import { Button, Form } from 'react-bootstrap';
 import { useForm } from '../utils/hooks'
 
@@ -10,7 +10,7 @@ function FeedPost() {
         content: ''
     });
 
-    const [createPost, { error }] = useMutation(CREATE_POST, {
+    const [createPost, { error }] = useMutation(ADD_POST, {
         variables: values,
         update(proxy, result) {
             const data = proxy.readQuery({

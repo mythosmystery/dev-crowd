@@ -36,13 +36,13 @@ function MakeComment({ refetch, postId }) {
                <Form.Group>
                   <Form.Control
                      type="content"
-                     placeholder={Auth.loggedIn() ? "What's on your mind" : 'Please log in to comment'}
+                     placeholder={Auth.loggedIn() ? "Add a comment..." : 'Please log in to comment'}
                      name="content"
                      value={formState.content}
                      onChange={onChange}
                   />
                   <Button type="submit" color="dark blue" disabled={!formState.content || !Auth.loggedIn()} className="my-2">
-                     Post!
+                     Comment!
                   </Button>
                </Form.Group>
             </Form>

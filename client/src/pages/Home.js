@@ -10,6 +10,7 @@ function Home() {
     <Container fluid="md">
       <div>
         <h1 className="text-center">Welcome to DevCrowd!</h1>
+        <h3 className="text-center"> -A place where developers can connect with each other</h3>
         <Carousel>
           <Carousel.Item>
             <img

@@ -16,7 +16,6 @@ function Profile() {
    if (loading || meQuery.loading) return <h2>loading</h2>;
 
    const { me } = meQuery.data;
-   console.log(me);
    return (
       <Container>
          <Row>

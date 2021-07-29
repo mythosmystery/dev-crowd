@@ -1,26 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { POST_BY_USER } from '../utils/queries';
 import { ADD_POST } from '../utils/mutations';
 import { Button, Form, Card } from 'react-bootstrap';
-import { useForm } from '../utils/hooks';
 
 function MakePost({ refetch, loggedIn }) {
+   const [formState, setFormState] = useState({ content: '' });
    const [addPost, { error }] = useMutation(ADD_POST);
 
-   const handleFormSubmit = async () => {
+   const onSubmit = async (event) => {
+      event.preventDefault();
       try {
          const { data } = await addPost({ variables: { ...formState } });
          if (data.addPost) {
-            formState.content = '';
             refetch();
+            setFormState({ content: '' });
          }
       } catch (err) {
          console.error(err);
       }
    };
-
-   const { formState, onChange, onSubmit } = useForm(handleFormSubmit);
+   const onChange = (event) => {
+      const { name, value } = event.target;
+      setFormState({
+         ...formState,
+         [name]: value,
+      });
+   };
 
    return (
       <Card>

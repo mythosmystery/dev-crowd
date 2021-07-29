@@ -17,6 +17,11 @@ module.exports = {
          }
          throw new AuthenticationError('You need to be logged in');
       },
+      searchUser: async (parent, args) => {
+         return User.find({ username: { $regex: args.username, $options: 'i' } })
+            .populate('followers')
+            .populate('following');
+      },
    },
    Mutation: {
       addUser: async (parent, { userInput }) => {

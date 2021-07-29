@@ -20,6 +20,26 @@ export const GET_ME = gql`
       }
    }
 `;
+export const SEARCH_USER = gql`
+   query searchUser($username: String!) {
+      searchUser(username: $username) {
+         _id
+         username
+         name
+         email
+         following {
+            _id
+            name
+            username
+         }
+         followers {
+            _id
+            name
+            username
+         }
+      }
+   }
+`;
 export const GET_MY_POSTS = gql`
    query myPosts {
       myPosts {

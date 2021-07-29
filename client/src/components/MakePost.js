@@ -5,7 +5,7 @@ import { ADD_POST } from '../utils/mutations';
 import { Button, Form, Card } from 'react-bootstrap';
 import { useForm } from '../utils/hooks';
 
-function MakePost({ refetch }) {
+function MakePost({ refetch, loggedIn }) {
    const [addPost, { error }] = useMutation(ADD_POST);
 
    const handleFormSubmit = async () => {
@@ -28,8 +28,14 @@ function MakePost({ refetch }) {
          <Card.Body>
             <Form onSubmit={onSubmit}>
                <Form.Group>
-                  <Form.Control type="content" placeholder="What's on your mind" name="content" value={formState.content} onChange={onChange} />
-                  <Button type="submit" color="dark blue" disabled={!formState.content} className="my-2">
+                  <Form.Control
+                     type="content"
+                     placeholder={loggedIn ? "What's on your mind" : 'Please log in to post'}
+                     name="content"
+                     value={formState.content}
+                     onChange={onChange}
+                  />
+                  <Button type="submit" color="dark blue" disabled={!formState.content || !loggedIn} className="my-2">
                      Post!
                   </Button>
                </Form.Group>

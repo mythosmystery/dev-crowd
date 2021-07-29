@@ -87,16 +87,25 @@ export const REMOVE_COMMENT = gql`
 export const LIKE_POST = gql`
    mutation likePost($postId: ID!) {
       likePost(postId: $postId) {
-         id
+         _id
          likes {
-            id
+            _id
             username
          }
-         likeCount
       }
    }
 `;
-
+export const UNLIKE_POST = gql`
+   mutation unlikePost($postId: ID!) {
+      unlikePost(postId: $postId) {
+         _id
+         likes {
+            _id
+            username
+         }
+      }
+   }
+`;
 export const LIKE_COMMENT = gql`
    mutation likeCommnet($commentId: ID!) {
       likeComment(commentId: $commentId) {

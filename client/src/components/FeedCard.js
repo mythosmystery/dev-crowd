@@ -4,6 +4,7 @@ import moment from 'moment';
 import Auth from '../utils/auth';
 import { useMutation } from '@apollo/client';
 import { REMOVE_POST } from '../utils/mutations';
+import LikeButton from './LikeButton';
 
 function FeedCard({ post, refetch }) {
    const { _id } = Auth.getProfile();
@@ -24,6 +25,7 @@ function FeedCard({ post, refetch }) {
             </Card.Header>
             <Card.Body>
                <Card.Title>{post.content}</Card.Title>
+               <Card.Text>Likes: {post.likes.length}</Card.Text>
             </Card.Body>
             <Card.Footer>
                Posted at {datePosted}
@@ -32,7 +34,7 @@ function FeedCard({ post, refetch }) {
                      Delete
                   </Button>
                ) : (
-                  <p></p>
+                  <LikeButton likes={post.likes} id={_id} postId={post._id} />
                )}
             </Card.Footer>
          </Card>

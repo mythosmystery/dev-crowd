@@ -2,7 +2,7 @@
 
 ## Description
 
-An app were developers can connect with each other.
+An app where developers can connect with each other.
 
 ## Links
 

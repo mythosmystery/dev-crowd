@@ -1,5 +1,5 @@
 import React from "react";
-import logo1 from "../Assets/images/logo1.png";
+import logo1 from "../Assets/images/logo-black.png";
 import developer_hands from "../Assets/images/developer_hands.jpg";
 import social_media from "../Assets/images/social_media.jpg";
 import Container from "react-bootstrap/Container";

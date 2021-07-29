@@ -1,7 +1,7 @@
 .footer {
-   background-color: navy;
-   position: sticky;
-   height: 22px;
+   background-color:#212529;
+   position: fixed;
+   height: 35px;
    bottom: 0;
    width: 100%;
 }

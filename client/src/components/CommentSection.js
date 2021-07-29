@@ -6,22 +6,18 @@ import moment from 'moment';
 function CommentSection({ comments, refetch, postId }) {
    return (
       <>
-         {comments.length ? (
-            <Card.Body>
-               <p>Comments:</p>
-               <ListGroup className="list-group-flush">
-                  {comments.map((comment) => {
-                     const datePosted = moment(comment.date).format('h:mm a');
-                     return <CommentCard comment={comment} datePosted={datePosted} />;
-                  })}
-                  <ListGroupItem>
-                     <MakeComment refetch={refetch} postId={postId} />
-                  </ListGroupItem>
-               </ListGroup>
-            </Card.Body>
-         ) : (
-            <p></p>
-         )}
+         <Card.Body>
+            <p>Comments:</p>
+            <ListGroup className="list-group-flush">
+               {comments.map((comment) => {
+                  const datePosted = moment(comment.date).format('h:mm a');
+                  return <CommentCard comment={comment} datePosted={datePosted} refetch={refetch} key={comment._id} />;
+               })}
+               <ListGroupItem>
+                  <MakeComment refetch={refetch} postId={postId} />
+               </ListGroupItem>
+            </ListGroup>
+         </Card.Body>
       </>
    );
 }

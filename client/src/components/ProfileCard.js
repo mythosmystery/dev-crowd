@@ -5,7 +5,7 @@ function ProfileCard({ user }) {
    return (
       <>
          <Container>
-            <Card className="my-2">
+            <Card className="my-3">
                <Card.Header>Profile</Card.Header>
                <Card.Body>
                   <Card.Title>

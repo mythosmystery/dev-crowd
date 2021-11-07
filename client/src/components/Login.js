@@ -33,7 +33,7 @@ function Login({ route }) {
 
    return (
       <Form onSubmit={handleFormSubmit}>
-         <Alert variant="danger" show={showErr} closeVariant="white">
+         <Alert variant="warning" show={showErr} closeVariant="white">
             {error?.message}
          </Alert>
          <Form.Group className="mb-3">

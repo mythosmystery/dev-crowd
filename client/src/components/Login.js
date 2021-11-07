@@ -2,27 +2,28 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
-import { Button, Form } from 'react-bootstrap';
+import { Alert, Button, Form } from 'react-bootstrap';
 
 function Login({ route }) {
    const [formState, setFormState] = useState({ email: '', password: '' });
    const [login, { error }] = useMutation(LOGIN_USER);
+   const [showErr, setShowErr] = useState(false);
 
-   const handleFormSubmit = async (event) => {
+   const handleFormSubmit = async event => {
       event.preventDefault();
       try {
-         //console.log({ ...formState });
          const { data } = await login({
             variables: { ...formState },
          });
          const token = data.login.token;
          Auth.login(token, route);
-      } catch (error) {
-         console.log(error);
+      } catch (err) {
+         console.log(err);
+         setShowErr(true);
       }
    };
 
-   const handleChange = (event) => {
+   const handleChange = event => {
       const { name, value } = event.target;
       setFormState({
          ...formState,
@@ -32,6 +33,9 @@ function Login({ route }) {
 
    return (
       <Form onSubmit={handleFormSubmit}>
+         <Alert variant="danger" show={showErr} closeVariant="white">
+            {error?.message}
+         </Alert>
          <Form.Group className="mb-3">
             <Form.Label htmlFor="email">Email</Form.Label>
             <Form.Control type="text" name="email" placeholder="Enter email" onChange={handleChange} value={formState.email} />

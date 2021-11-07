@@ -6,11 +6,11 @@ import SearchCard from './SearchCard';
 function Search() {
    const [formState, setFormState] = useState({ username: '' });
    const [searchUser, { loading, data }] = useLazyQuery(SEARCH_USER, { variables: { username: formState.username } });
-   const onSubmit = (event) => {
+   const onSubmit = event => {
       event.preventDefault();
       //   searchUser();
    };
-   const onChange = (event) => {
+   const onChange = event => {
       const { name, value } = event.target;
       setFormState({
          ...formState,
@@ -18,7 +18,7 @@ function Search() {
       });
       searchUser();
    };
-   console.log(data);
+   // console.log(data);
    return (
       <Container>
          <Form onSubmit={onSubmit}>
@@ -31,15 +31,15 @@ function Search() {
          </Form>
          <Row>
             {data ? (
-               data.searchUser.map((user) => {
+               data.searchUser.map(user => {
                   return (
-                     <Col xs={6} md={3}>
+                     <Col>
                         <SearchCard user={user} />
                      </Col>
                   );
                })
             ) : (
-               <p></p>
+               <p>No results...</p>
             )}
          </Row>
       </Container>

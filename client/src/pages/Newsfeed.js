@@ -9,18 +9,16 @@ function Newsfeed() {
    const { data, loading, refetch } = useQuery(GET_ME);
    if (loading) return <h2>Loading</h2>;
    return (
-      <Container>
-         <Row>
-            <Col className="d-none d-md-block">
-               <Row>
-                  <FollowingList />
-               </Row>
-            </Col>
-            <Col xs={12} md={9}>
-               <Feed user={data.me} />
-            </Col>
-         </Row>
-      </Container>
+      <Row>
+         <Col className='d-none d-md-block'>
+            <Row>
+               <FollowingList />
+            </Row>
+         </Col>
+         <Col xs={12} md={9}>
+            <Feed user={data.me} />
+         </Col>
+      </Row>
    );
 }
 export default Newsfeed;

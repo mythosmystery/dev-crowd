@@ -17,26 +17,26 @@ function Profile() {
 
    const { me } = meQuery.data;
    return (
-      <Container>
-         <Row>
-            <Col md={3}>
-               <Row>
-                  <ProfileCard user={me} />
-               </Row>
-               <Row>
-                  <FollowingList />
-               </Row>
-            </Col>
-            <Col xs={12} md={9}>
-               <Row className="my-3">
-                  <Col>
-                     <MakePost refetch={refetch} loggedIn={Auth.loggedIn()} />
-                  </Col>
-               </Row>
-               <Row className="my-2">{data ? <ProfileFeed posts={data.postsByUser} refetch={refetch} /> : <h2>Loading posts</h2>}</Row>
-            </Col>
-         </Row>
-      </Container>
+      <Row>
+         <Col md={3}>
+            <Row>
+               <ProfileCard user={me} />
+            </Row>
+            <Row>
+               <FollowingList />
+            </Row>
+         </Col>
+         <Col xs={12} md={9}>
+            <Row className='my-3'>
+               <Col>
+                  <MakePost refetch={refetch} loggedIn={Auth.loggedIn()} />
+               </Col>
+            </Row>
+            <Row className='my-2'>
+               {data ? <ProfileFeed posts={data.postsByUser} refetch={refetch} /> : <h2>Loading posts</h2>}
+            </Row>
+         </Col>
+      </Row>
    );
 }
 

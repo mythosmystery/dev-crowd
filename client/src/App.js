@@ -14,7 +14,7 @@ import Profile from './pages/Profile';
 import Newsfeed from './pages/Newsfeed';
 
 const httpLink = createHttpLink({
-   uri: '/graphql',
+   uri: '/graphql'
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -24,14 +24,14 @@ const authLink = setContext((_, { headers }) => {
    return {
       headers: {
          ...headers,
-         authorization: token ? `Bearer ${token}` : '',
-      },
+         authorization: token ? `Bearer ${token}` : ''
+      }
    };
 });
 
 const client = new ApolloClient({
    link: authLink.concat(httpLink),
-   cache: new InMemoryCache(),
+   cache: new InMemoryCache()
 });
 
 function App() {
@@ -39,10 +39,10 @@ function App() {
    return (
       <ApolloProvider client={client}>
          <Router>
-            <Navbar authRoute="/profile" />
-            <Container>
-               <Route exact path="/" component={homePage} />
-               <Route exact path="/profile" component={Profile} />
+            <Navbar authRoute='/profile' />
+            <Container fluid>
+               <Route exact path='/' component={homePage} />
+               <Route exact path='/profile' component={Profile} />
             </Container>
             <Footer />
          </Router>

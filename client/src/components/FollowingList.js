@@ -16,10 +16,10 @@ function FollowingList() {
    return (
       <>
          <Container>
-            <h3>Following: {data.me.following.length}</h3>
-            {data.me.following.map((user) => {
+            <h3 className='display-6 text-white'>Following: {data.me.following.length}</h3>
+            {data.me.following.map(user => {
                return (
-                  <Card className="my-1" key={user._id}>
+                  <Card className='my-1' key={user._id}>
                      <Card.Header>
                         {user.name} - ({user.username})
                      </Card.Header>
@@ -29,10 +29,10 @@ function FollowingList() {
                   </Card>
                );
             })}
-            <h3>Followers: {data.me.followers.length}</h3>
-            {data.me.followers.map((user) => {
+            <h3 className='display-6 text-white'>Followers: {data.me.followers.length}</h3>
+            {data.me.followers.map(user => {
                return (
-                  <Card className="my-1" key={user._id}>
+                  <Card className='my-1' key={user._id}>
                      <Card.Header>
                         {user.name} - ({user.username})
                      </Card.Header>

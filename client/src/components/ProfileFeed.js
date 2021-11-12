@@ -7,8 +7,8 @@ function ProfileFeed({ posts, refetch }) {
       <>
          {posts.length > 0 ? (
             <Container>
-               <h5>Your Posts</h5>
-               {posts.map((post) => {
+               <h4 className='text-white'>Your Posts</h4>
+               {posts.map(post => {
                   return <FeedCard post={post} key={post._id} refetch={refetch} />;
                })}
             </Container>

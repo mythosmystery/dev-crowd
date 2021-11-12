@@ -4,6 +4,7 @@ import { Navbar, Nav, Container } from 'react-bootstrap';
 import AccountModal from './AccountModal';
 import SearchModal from './SearchModal';
 import Auth from '../utils/auth';
+import { FaCode } from 'react-icons/fa';
 
 const AppNavbar = ({ authRoute }) => {
    // set modal display state
@@ -15,6 +16,7 @@ const AppNavbar = ({ authRoute }) => {
          <Navbar bg='dark' variant='dark' expand='lg' sticky='top'>
             <Container fluid>
                <Navbar.Brand as={Link} to='/'>
+                  <FaCode className='mx-2' size='26' />
                   DevCrowd
                </Navbar.Brand>
                <Navbar.Toggle aria-controls='navbar' />

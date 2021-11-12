@@ -8,9 +8,9 @@ function CommentSection({ comments, refetch, postId }) {
       <>
          <Card.Body>
             <p>Comments:</p>
-            <ListGroup className="list-group-flush">
-               {comments.map((comment) => {
-                  const datePosted = moment(comment.date).format('h:mm a');
+            <ListGroup className='list-group-flush'>
+               {comments.map(comment => {
+                  const datePosted = moment(comment.date).format('h:mm a on MM-DD-YY');
                   return <CommentCard comment={comment} datePosted={datePosted} refetch={refetch} key={comment._id} />;
                })}
                <ListGroupItem>

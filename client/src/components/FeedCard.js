@@ -10,7 +10,7 @@ import CommentSection from './CommentSection';
 function FeedCard({ post, refetch }) {
    const { _id } = Auth.getProfile();
 
-   const datePosted = moment(post.date).format('h:mm a');
+   const datePosted = moment(post.date).format('h:mm a on MM-DD-YY');
 
    const [removePost] = useMutation(REMOVE_POST);
    const handlePostDelete = async ({ target }) => {
@@ -20,7 +20,7 @@ function FeedCard({ post, refetch }) {
 
    return (
       <>
-         <Card className="my-2">
+         <Card className='my-2'>
             <Card.Header>
                {post.postedBy.name} - ({post.username})
             </Card.Header>
@@ -31,7 +31,7 @@ function FeedCard({ post, refetch }) {
             <Card.Footer>
                Posted at {datePosted}
                {_id === post.postedBy._id ? (
-                  <Button variant="danger" className="mx-3" size="sm" onClick={handlePostDelete} value={post._id}>
+                  <Button variant='danger' className='mx-3' size='sm' onClick={handlePostDelete} value={post._id}>
                      Delete
                   </Button>
                ) : (

@@ -17,7 +17,7 @@ function FollowButton({ id }) {
       return () => {};
    }, [data.me.following, id]);
 
-   const handleClick = (event) => {
+   const handleClick = event => {
       if (isFollowing) handleUnfollow();
       if (!isFollowing) handleFollow();
    };
@@ -34,7 +34,13 @@ function FollowButton({ id }) {
    };
 
    return (
-      <Button className="mx-3" variant={!isFollowing ? 'primary' : 'danger'} size="sm" onClick={handleClick} disabled={data.me._id === id}>
+      <Button
+         className='mx-3'
+         variant={!isFollowing ? 'outline-primary' : 'outline-danger'}
+         size='sm'
+         onClick={handleClick}
+         disabled={data.me._id === id}
+      >
          {!isFollowing ? 'Follow' : 'Unfollow'}
       </Button>
    );

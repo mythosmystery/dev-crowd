@@ -23,7 +23,13 @@ function CommentCard({ comment, datePosted, refetch }) {
             </Card.Body>
             <Card.Footer>
                {_id === comment.postedBy._id ? (
-                  <Button variant="danger" className="mx-3" size="sm" onClick={handleCommentDelete} value={comment._id}>
+                  <Button
+                     variant='outline-danger'
+                     className='mx-3'
+                     size='sm'
+                     onClick={handleCommentDelete}
+                     value={comment._id}
+                  >
                      Delete
                   </Button>
                ) : (

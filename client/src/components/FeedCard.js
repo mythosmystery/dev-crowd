@@ -31,7 +31,13 @@ function FeedCard({ post, refetch }) {
             <Card.Footer>
                Posted at {datePosted}
                {_id === post.postedBy._id ? (
-                  <Button variant='danger' className='mx-3' size='sm' onClick={handlePostDelete} value={post._id}>
+                  <Button
+                     variant='outline-danger'
+                     className='mx-3'
+                     size='sm'
+                     onClick={handlePostDelete}
+                     value={post._id}
+                  >
                      Delete
                   </Button>
                ) : (
